@@ -16,10 +16,10 @@
 
 package com.google.samples.apps.sunflower.viewmodels
 
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.PlantRepository
@@ -28,10 +28,9 @@ import com.google.samples.apps.sunflower.data.PlantRepository
  * The ViewModel for [PlantListFragment].
  */
 class PlantListViewModel internal constructor(
-        private val plantRepository: PlantRepository
+    private val plantRepository: PlantRepository
 ) : ViewModel() {
 
-    private val NO_GROW_ZONE = -1
     private val growZoneNumber = MutableLiveData<Int>()
 
     private val plantList = MediatorLiveData<List<Plant>>()
@@ -59,4 +58,9 @@ class PlantListViewModel internal constructor(
         growZoneNumber.value = NO_GROW_ZONE
     }
 
+    fun isFiltered() = growZoneNumber.value != NO_GROW_ZONE
+
+    companion object {
+        private const val NO_GROW_ZONE = -1
+    }
 }
